@@ -21,6 +21,10 @@
                         <div class=""><a href="https://eu.louisvuitton.com/eng-e1/homepage" class="">FASTBITEs</a></div>
                     </div>
                 </div>
+
+                <p1> Le Cong Anh xin chao</p1>
+
+
                 <div class="basis-1/4">
                     <div class="uppercase font-semibold tracking-wider text-gray-700 mb-4">Follow us</div>
                     <div class="flex flex-col gap-3">
