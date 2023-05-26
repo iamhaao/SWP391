@@ -23,9 +23,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LoginServlet extends HttpServlet {
-
-   
-
    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
