@@ -47,17 +47,15 @@ public class UploadAvatar extends HttpServlet{
 
          protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-           HttpSession session=request.getSession();
            String image = "./images/" + uploadImage("image", request);
-           Account acc=(Account) session.getAttribute("acc");
-           String username=acc.getUsername();
+           String username=request.getParameter("id");
            AccountDB adb=new AccountDB();
+           Account acc=adb.getAccountByUsername(username);          
            adb.updateImg(acc.getUsername(),image);
-           session.removeAttribute("acc");
            Account acc1=adb.getAccountByUsername(username);
            acc1.getAvatar();
-           session.setAttribute("acc", acc1);
-           response.sendRedirect("profile");
+           request.setAttribute("acc", acc1);
+           request.getRequestDispatcher("EditProfile.jsp").forward(request, response);
          };
 
    

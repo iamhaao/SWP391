@@ -5,12 +5,12 @@
 <main>
     <link rel="stylesheet" href="./css/styleEditProfile.css"/>
     <div class="container-xl px-4 mt-20">  
-        <c:set value="${sessionScope.acc}" var="acc" />
+        <c:set value="${requestScope.acc}" var="acc" />
         <hr class="mt-0 mb-4">
         <div class="row">
             <div class="col-xl-4  text-center justify-content-center ">
                 <!-- Profile picture card-->
-                <form action="uploadAvatar" enctype='multipart/form-data' method="post">
+                <form action="uploadAvatar?id=${acc.username}" enctype='multipart/form-data' method="post">
                     <div class="card mb-4 mb-xl-0">
                         <div class="card-header">Profile Picture</div>
                         <div class="card-body text-center mx-auto">
@@ -30,7 +30,7 @@
                 <div class="card mb-4">
                     <div class="card-header">Account Details</div>
                     <div class="card-body">
-                        <form action="updateProfile">
+                        <form action="profile" method="post">
                             <!-- Form Group (username)-->
                             <div class="mb-3">
                                 <label class="small mb-1" for="inputUsername">Username</label>
@@ -64,7 +64,7 @@
                                 <!-- Form Group (first name)-->
                                 <div class="col-md">
                                     <label class="small mb-1" for="inputFirstName">Address</label>
-                                    <input class="form-control" id="inputFirstName" type="text" placeholder="name" name="name" value="${acc.address}">
+                                    <input class="form-control" id="inputFirstName" type="text" placeholder="address" name="address" value="${acc.address}">
                                 </div>
                                 <!-- Form Group (last name)-->
 

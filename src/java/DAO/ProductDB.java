@@ -205,4 +205,24 @@ public class ProductDB extends DBContext {
         } catch (Exception e) {
         }
     }
+
+    public List<Product> newProducts() {
+        String sql="execute newproduct";
+        ArrayList<Product> newproduct = new ArrayList<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            for (Integer integer : list) {
+                ProductDB pdb = new ProductDB();
+                Product p = pdb.getProductByID(integer);
+                newproduct.add(p);
+            }
+        } catch (Exception e) {
+        }
+        return newproduct;
+    }
 }

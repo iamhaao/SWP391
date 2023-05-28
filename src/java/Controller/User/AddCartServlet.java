@@ -1,4 +1,4 @@
-package Controller;
+package Controller.User;
 
 import Models.Cart;
 import java.io.IOException;
