@@ -69,7 +69,7 @@
                             <li
                                 class="cursor-pointer py-1 hover:text-gray-800 relative after:absolute after:bottom-0 after:left-0 after:bg-slate-900
                                 after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:ease-out after:duration-300">
-                                <a href="https://vi.wikipedia.org/wiki/Louis_Vuitton" class="">About</a>
+                                <a href="home" class="">About</a>
                             </li>
 
                             <li
@@ -84,7 +84,7 @@
                                 <c:if test="${acc.username!=null}">Welcome,${sessionScope.acc.username}</c:if>
                                     <div  class="absolute hidden group-hover:block group-hover:visible top-full min-w-full w-max bg-white shadow-md rounded">
                                         <ul class="text-left border rounded">
-                                        <c:if test="${acc.username!=null}"> <li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="EditProfile.jsp">VIEW PROFILE</a> </li></c:if>
+                                        <c:if test="${acc.username!=null}"> <li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="profile?id=${user.username}">VIEW PROFILE</a> </li></c:if>
                                         <c:if test="${sessionScope.user.idRole==1}"><li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="manageOrder">Sale Manage</a>  </li> </c:if>
                                         <c:if test="${sessionScope.user.idRole==2}"><li class="px-4 py-1 hover:bg-gray-500 border-b "><a href="history?id=${sessionScope.acc.idAccount}">BUY HISTORY</a> </li> </c:if> 
                                         <c:if test="${sessionScope.user.idRole==1}"><li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="manageProduct">Manage Product</a>  </li> </c:if>

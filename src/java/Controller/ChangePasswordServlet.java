@@ -13,14 +13,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 
 
 
@@ -36,20 +28,25 @@ public class ChangePasswordServlet extends HttpServlet {
         AccountDB adb = new AccountDB();
         Account acc = adb.getAccountByUsername(username);
         if (acc.getPassword().equals(pass)) {
-            if(!Validation.validatePassword(newpass)||Validation.validatePassword(confirm) ){
+            if(!Validation.validatePassword(newpass)||!Validation.validatePassword(confirm) ){
                 request.setAttribute("alert", "New Password or ConfirmPass is not grather than 6 character");
+                request.setAttribute("acc", acc);
                 request.getRequestDispatcher("EditProfile.jsp").forward(request, response);
             }
            else if (confirm.equals(newpass)) {
                 adb.updatePass(username, newpass);
                 request.setAttribute("alert", "Change passs success full!");
+                Account acc1 = adb.getAccountByUsername(username);
+                request.setAttribute("acc", acc1);
                 request.getRequestDispatcher("EditProfile.jsp").forward(request, response);
             } else {
+               request.setAttribute("acc", acc);
                 request.setAttribute("alert", "New password is not equals with confirm password!");
                 request.getRequestDispatcher("EditProfile.jsp").forward(request, response);
             }
 
         } else {
+            request.setAttribute("acc", acc);
             request.setAttribute("alert", "Your current passsword incorrect!");
             request.getRequestDispatcher("EditProfile.jsp").forward(request, response);
         }

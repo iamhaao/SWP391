@@ -96,6 +96,10 @@
         <servlet-name>BuyHistoryServlet</servlet-name>
         <servlet-class>Controller.User.BuyHistoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginFillter</servlet-name>
+        <servlet-class>Fillter.LoginFillter</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>productListServlet</servlet-name>
         <url-pattern>/products</url-pattern>
@@ -192,9 +196,38 @@
         <servlet-name>BuyHistoryServlet</servlet-name>
         <url-pattern>/history</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginFillter</servlet-name>
+        <url-pattern>/LoginFillter</url-pattern>
+    </servlet-mapping>
+<filter>
+    <filter-name>CartFilter</filter-name>
+    <filter-class>Fillter.CartFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>CartFilter</filter-name>
+    <url-pattern>/addcart</url-pattern>
+</filter-mapping>
+<filter-mapping>
+    <filter-name>CartFilter</filter-name>
+    <url-pattern>/cart</url-pattern>
+</filter-mapping>
+<filter-mapping>
+    <filter-name>CartFilter</filter-name>
+    <url-pattern>/payment</url-pattern>
+</filter-mapping>
+<filter-mapping>
+    <filter-name>CartFilter</filter-name>
+    <url-pattern>/checkout</url-pattern>
+</filter-mapping>
+<filter-mapping>
+    <filter-name>CartFilter</filter-name>
+    <url-pattern>/profile</url-pattern>
+</filter-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    
 </web-app>

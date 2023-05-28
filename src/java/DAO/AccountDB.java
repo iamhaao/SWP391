@@ -59,13 +59,14 @@ public class AccountDB extends DBContext {
         String sql = "UPDATE [dbo].[Account]\n"
                 + "   SET [Username] = ?\n"
                 + "      ,[Password] = ?\n"
-                + "      ,[name] =?\n"
+                + "      ,[name] = ?\n"
                 + "      ,[Email] = ?\n"
-                + "      ,[Address] = ?\n"
+                + "      ,[Address] =?\n"
                 + "      ,[Phone] = ?\n"
                 + "      ,[roleId] = ?\n"
-                + "      ,[avatar] =?\n"
-                + " WHERE ?";
+                + "      ,[avatar] = ?\n"
+                + "      ,[active] = ?\n"
+                + " WHERE Username=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, c.getUsername());
@@ -76,7 +77,9 @@ public class AccountDB extends DBContext {
             stmt.setString(6, c.getPhone());
             stmt.setInt(7, c.getIdRole());
             stmt.setString(8, c.getAvatar());
-            stmt.setString(9, c.getUsername());
+            stmt.setInt(9, c.getActive());
+            stmt.setString(10, c.getUsername());
+            stmt.executeUpdate();
         } catch (SQLException e) {
         }
     }
@@ -183,8 +186,9 @@ public class AccountDB extends DBContext {
 //        for (Account account : list) {
 //            System.out.println(account.toString());
 //        }
-     adb.block("nin");
-         
+//     adb.block("nin");
+        Account acc = new Account(12, "conganh", null, null, null, null, null, 1, null, 0);
+        adb.updateCustomer(acc);
 
     }
 
@@ -200,7 +204,7 @@ public class AccountDB extends DBContext {
     }
 
     public void block(String username) {
-        String sql="Update Account set active=? where Username=?";
+        String sql = "Update Account set active=? where Username=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setInt(1, 0);
@@ -211,7 +215,7 @@ public class AccountDB extends DBContext {
     }
 
     public void updatePass(String username, String newpass) {
-        String sql="Update Account set Password=? where Username=?";
+        String sql = "Update Account set Password=? where Username=?";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, newpass);

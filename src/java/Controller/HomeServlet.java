@@ -34,9 +34,11 @@ public class HomeServlet extends HttpServlet {
         List<Order> list = odb.listOrderNotDone();
         int count1 = list.size();
         List<Product> bestseller = pdb.bestSeller();
+        List<Product> newproducts = pdb.newProducts();
         session.setAttribute("sizeShipper", count1);
         session.setAttribute("listOrder", list);
         session.setAttribute("bestseller", bestseller);
+        session.setAttribute("newproducts", newproducts);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 
