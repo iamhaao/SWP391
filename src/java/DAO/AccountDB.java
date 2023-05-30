@@ -51,7 +51,30 @@ public class AccountDB extends DBContext {
         }
         return acc;
     }
-
+        public Account getAccountByEmail(String Email) {
+        Account acc = new Account();
+        String sql = "select * from Account where Email =?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, Email);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                acc.setIdAccount(rs.getInt(1));
+                acc.setUsername(rs.getString(2));
+                acc.setPassword(rs.getString(3));
+                acc.setName(rs.getString(4));
+                acc.setEmail(rs.getString(5));
+                acc.setAddress(rs.getString(6));
+                acc.setPhone(rs.getString(7));
+                acc.setIdRole(rs.getInt(8));
+                acc.setAvatar(rs.getString(9));
+                acc.setActive(rs.getInt(10));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return acc;
+    }
     ;
 
 
@@ -152,7 +175,17 @@ public class AccountDB extends DBContext {
 
         return acc;
     }
-
+     public void updateCustomerByEmail(String email, String pass) {
+        String sql = "update Account set Password=? where Email=? ";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, pass);
+            stmt.setString(2, email);
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+        }
+    }
     public Account getAccountByID(int id) {
         Account acc = new Account();
         String sql = "select * from Account where AccountID=?";
@@ -176,21 +209,23 @@ public class AccountDB extends DBContext {
         }
         return acc;
     }
-
-    ;
-        public static void main(String[] args) {
-        AccountDB adb = new AccountDB();
-////        boolean result=adb.checkSignUp("iamhaao1");
-//        List<Account> list = adb.getAll();
-//
-//        for (Account account : list) {
-//            System.out.println(account.toString());
-//        }
-//     adb.block("nin");
-        Account acc = new Account(12, "conganh", null, null, null, null, null, 1, null, 0);
-        adb.updateCustomer(acc);
-
+public boolean isAccountByEmail(String email) {
+       boolean result = false;
+        String sql = "select * from Account where Email=?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+        }
+        return false;
     }
+    ;
+    ;
+
 
     public void updateImg(String username, String image) {
         String sql = "Update Account SET avatar=? where Username=?";
@@ -224,4 +259,25 @@ public class AccountDB extends DBContext {
         } catch (Exception e) {
         }
     }
+    public void addAccountLoginWithGoogle(Account acc) {
+        String sql = "insert account(username, email, roleId)\n" +
+                       "values(?,?,2);";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1,acc.getUsername() );
+            stmt.setString(2, acc.getEmail());
+            stmt.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
+   
+        public static void main(String[] args) {
+            AccountDB adb = new AccountDB();
+//            Account acc = new Account("testlogin", "testlogin@gmail.com");
+//           adb.addAccountLoginWithGoogle(acc);
+             Account acc = adb.getAccountByEmail("trinhltnde160563@gmail.com");
+             System.out.println(acc.getEmail() == null);
+             
+
+        }
 }
