@@ -72,15 +72,25 @@
                   >Remember me</label
                 >
               </div>
-              <a href="Forgot.jsp" class="text-gray-800">Forgot password?</a>
+               <button type="button" class="" data-toggle="modal" data-target="#verify">
+                    Forgot password?
+                </button>
             </div>
                   <h1>${requestScope.alert}</h1>
+                    <h1 class="text-danger" >${requestScope.mess}</h1>
             <div class="text-center lg:text-left">
               <button
                 class="inline-block px-7 py-3 bg-black text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-gray-800 hover:shadow-lg focus:bg-black focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
               >
                 Login
               </button>
+                <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0 text-muted" style="display: inline-block; padding-left:  180px">OR</p>
+          </div>
+           <a  class="btn btn-primary btn-lg btn-block" style="background-color: #55acee;" href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/SWP391/LoginGoogleHandler&response_type=code&client_id=876393109162-qq2f685854i38o0mjnmb8690kgd0c202.apps.googleusercontent.com&approval_prompt=force"
+            role="button">
+            <i class="fab fa-google me-2"></i>Login with Google
+           </a>
               <p class="text-sm font-semibold mt-2 pt-1 mb-0">
                 Don't have an account?
                 <a
@@ -91,9 +101,32 @@
               </p>
             </div>
           </form>
+           
+              
         </div>
       </div>
     </div>
   </section>
+     <form action="UserVerify" method="post">    
+        <div class="modal fade" id="verify" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+             <h5 class="modal-title" id="verify">User email verification:</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+           <div class="modal-body">
+             <label for="emailInput">Your gmail:</label>
+             <input name="useremail" type="email" class="form-control" id="emailInput" placeholder="Enter your email">
+           </div>
+           <div class="modal-footer">
+             <button type="submit" class="btn btn-primary text-gray-800">Send</button>
+           </div>
+         </div>
+       </div>
+
+    </form>
 </body>
 <%@include file="./includes/footer.jsp" %>

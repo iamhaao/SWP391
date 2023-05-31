@@ -35,9 +35,9 @@
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                             </div>
-                            <span class="review-no">41 reviews</span>
+                            <span class="review-no">41 reviews </span>
                         </div>
-                        <p class="product-description">${p.description}</p>
+                        <p class="product-description">${p.description} </p>
                         <h4 class="price"> price: <span>${p.price}</span></h4>
                         <div class="action">
                             <button class="add-to-cart btn btn-default" type="button"> <a href="addcart?id=${p.idProduct}">add to cart</a></button>
@@ -54,7 +54,7 @@
         <div class="container">   
             <div class="row">
                 <div class="col-sm-8">   
-                    <form>
+                    <form action="feedback" method="GET">
                         <h3 class="pull-left">New Comment</h3>
                         <button type="submit" class="btn btn-normal pull-right">Submit</button>
                         <fieldset>
@@ -63,7 +63,8 @@
                                     <img class="img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-9 col-lg-10">
-                                    <textarea class="form-control" id="message" placeholder="Your message" required=""></textarea>
+                                    <input value="${p.idProduct}" name="idProduct"class="text-white">
+                                    <textarea name="comment" class="form-control" id="message" placeholder="Your message" required=""></textarea>
                                 </div>
                             </div>  	
                         </fieldset>
@@ -72,75 +73,36 @@
                     <h3>4 Comments</h3>
 
                     <!-- COMMENT 1 - START -->
-                    <div class="media">
-                        <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
-                        <div class="media-body">
-                            <h4 class="media-heading">John Doe</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <ul class="list-unstyled list-inline media-detail pull-left">
-                                <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                                <li><i class="fa fa-thumbs-up"></i>13</li>
-                            </ul>
-                            <ul class="list-unstyled list-inline media-detail pull-right">
-                                <li class=""><a href="">Like</a></li>
-                                <li class=""><a href="">Reply</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                     <!-- COMMENT 1 - END -->
 
                     <!-- COMMENT 2 - START -->
-                    <div class="media">
-                        <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt=""></a>
-                        <div class="media-body">
-                            <h4 class="media-heading">John Doe</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <ul class="list-unstyled list-inline media-detail pull-left">
-                                <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                                <li><i class="fa fa-thumbs-up"></i>13</li>
-                            </ul>
-                            <ul class="list-unstyled list-inline media-detail pull-right">
-                                <li class=""><a href="">Like</a></li>
-                                <li class=""><a href="">Reply</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                     <!-- COMMENT 2 - END -->
 
                     <!-- COMMENT 3 - START -->
-                    <div class="media">
-                        <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt=""></a>
-                        <div class="media-body">
-                            <h4 class="media-heading">John Doe</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <ul class="list-unstyled list-inline media-detail pull-left">
-                                <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                                <li><i class="fa fa-thumbs-up"></i>13</li>
-                            </ul>
-                            <ul class="list-unstyled list-inline media-detail pull-right">
-                                <li class=""><a href="">Like</a></li>
-                                <li class=""><a href="">Reply</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    
                     <!-- COMMENT 3 - END -->
 
                     <!-- COMMENT 4 - START -->
-                    <div class="media">
-                        <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt=""></a>
-                        <div class="media-body">
-                            <h4 class="media-heading">John Doe</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <ul class="list-unstyled list-inline media-detail pull-left">
-                                <li><i class="fa fa-calendar"></i>27/02/2014</li>
-                                <li><i class="fa fa-thumbs-up"></i>13</li>
-                            </ul>
-                            <ul class="list-unstyled list-inline media-detail pull-right">
-                                <li class=""><a href="">Like</a></li>
-                                <li class=""><a href="">Reply</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                     <c:forEach items="${listFb}" var="fb">
+                        
+                            <div class="media">
+
+                                <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt=""></a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">${fb.accountID}</h4>
+                                    <p>${fb.script}</p>
+                                    <ul class="list-unstyled list-inline media-detail pull-left">
+                                        <li><i class="fa fa-calendar"></i>${fb.date}</li>
+                                        <li><i class="fa fa-thumbs-up"></i>${fb.productID}</li>
+                                    </ul>
+                                    
+                                </div>
+
+                            </div>
+                         </div>       
+                     </c:forEach>
                     <!-- COMMENT 4 - END -->
 
                 </div>

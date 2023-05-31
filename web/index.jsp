@@ -188,25 +188,30 @@
         </div>
     </div>
     <div class="subcribe-us h-[350px] bg-[#1d1f2e] flex flex-col justify-center items-center mb-20 ">
-        <div class="lh-subheadline flex justify-center items-center mb-3">
-            <div class="lh-subheadline-deco-line w-8 h-px bg-gray-400"></div>
-            <div class="lh-subheadline-label uppercase text-gray-400 font-bold mx-4 tracking-widest text-[13px]">
-                SIGN UP AND GET
-                FREE GIFT FROM FASTBITEs
-            </div>
-            <div class="lh-subheadline-deco-line w-8 h-px bg-gray-400"></div>
+    <div class="lh-subheadline flex justify-center items-center mb-3">
+        <div class="lh-subheadline-deco-line w-8 h-px bg-gray-400"></div>
+        <div class="lh-subheadline-label uppercase text-gray-400 font-bold mx-4 tracking-widest text-[13px]">
+            SIGN UP AND GET
+            FREE GIFT FROM FASTBITEs
         </div>
-        <div class="text-4xl text-white mb-4">FASTBITEs EVENT for SUMMER 23 </div>
-        <div class="lh-form flex justify-center items-center gap-3">
-            <div class="form-item">
-                <input type="email" placeholder="example@gmail.com" class="px-6 py-4 w-[400px] h-[50px] bg-inherit border-[1px] border-gray-700 outline-none
-                       text-white leading-5 focus:border-gray-300">
-            </div>
-            <div class="form-item">
-                <button type="submit" class="bg-white text-gray-900 w-[100px] h-[50px]">Subcribe</button>
-            </div>
+        <div class="lh-subheadline-deco-line w-8 h-px bg-gray-400"></div>
+    </div>
+    <div class="text-4xl text-white mb-4">FASTBITEs EVENT for SUMMER 23 </div>
+        <form action="getEmailSendEvent" method="post">   
+            <div class="lh-form flex justify-center items-center gap-3">
+                <div class="form-item">
+                    <input name="useremail" type="email" placeholder="example@gmail.com" class="px-6 py-4 w-[400px] h-[50px] bg-inherit border-[1px] border-gray-700 outline-none
+                           text-white leading-5 focus:border-gray-300">
+                </div>
+                <div class="form-item">
+                    <button type="submit" class="bg-white text-gray-900 w-[100px] h-[50px]">Subcribe</button>
+                </div>
 
-        </div>
+
+            </div>
+            
+        <form>
+            <h1 style="color: white">${requestScope.mess}</h1>
     </div>
 </main>
 <%@include file="/includes/footer.jsp" %>

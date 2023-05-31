@@ -4,7 +4,7 @@ package Models;
 
 public class Account {
   
-     private int idAccount;
+    private int idAccount;
      private String username;
      private String password;
      private String name;
@@ -14,6 +14,29 @@ public class Account {
      private int idRole;
      private String avatar;
      private int active;
+     String code;
+
+    public Account(String username, String email) {
+        this.username = username;
+        this.email = email;
+    }
+
+  
+
+   
+  
+     
+    public Account(String code) {
+        this.code = code;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public Account() {
     }
@@ -118,7 +141,9 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" + "idAccount=" + idAccount + ", username=" + username + ", password=" + password + ", name=" + name + ", email=" + email + ", address=" + address + ", phone=" + phone + ", idRole=" + idRole + ", avatar=" + avatar + ", active=" + active + '}';
-    }     
+        return "Account{" + "idAccount=" + idAccount + ", username=" + username + ", password=" + password + ", name=" + name + ", email=" + email + ", address=" + address + ", phone=" + phone + ", idRole=" + idRole + '}';
+    }
+     
+     
     
 }

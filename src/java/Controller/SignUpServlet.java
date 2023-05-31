@@ -31,6 +31,7 @@ public class SignUpServlet extends HttpServlet {
         String birthday_raw = request.getParameter("birthday");
         String avatar = "./images/defaultAvt.jpg";
         Date birthday = null;
+        
         try {
             birthday = new SimpleDateFormat("yyyy-MM-dd").parse(birthday_raw);
         } catch (ParseException ex) {
