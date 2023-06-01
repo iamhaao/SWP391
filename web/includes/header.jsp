@@ -84,13 +84,13 @@
                                 <c:if test="${acc.username!=null}">Welcome,${sessionScope.acc.username}</c:if>
                                     <div  class="absolute hidden group-hover:block group-hover:visible top-full min-w-full w-max bg-white shadow-md rounded">
                                         <ul class="text-left border rounded">
-                                        <c:if test="${acc.username!=null}"> <li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="profile?id=${user.username}">VIEW PROFILE</a> </li></c:if>
-                                        <c:if test="${sessionScope.user.idRole==1}"><li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="manageOrder">Sale Manage</a>  </li> </c:if>
-                                        <c:if test="${sessionScope.user.idRole==2}"><li class="px-4 py-1 hover:bg-gray-500 border-b "><a href="history?id=${sessionScope.acc.idAccount}">BUY HISTORY</a> </li> </c:if> 
-                                        <c:if test="${sessionScope.user.idRole==1}"><li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="manageProduct">Manage Product</a>  </li> </c:if>
-                                        <c:if test="${sessionScope.user.idRole==1}"><li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="manageAccount">Manage Account</a>  </li> </c:if>
-                                        <c:if test="${sessionScope.user.idRole==3}"><li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="manageDelivery?id=${sessionScope.acc.idAccount}">Manage delivery orders</a>  </li> </c:if>
-                                        <c:if test="${sessionScope.user.idRole!=null}">   <li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="logout?id=${sessionScope.acc.idAccount}">LOG OUT</a></li></c:if>
+                                        <c:if test="${acc.username!=null}"> <li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="profile?id=${sessionScope.acc.username}">VIEW PROFILE</a> </li></c:if>
+                                        <c:if test="${acc.idRole==1}"><li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="manageOrder">Sale Manage</a>  </li> </c:if>
+                                        <c:if test="${acc.idRole==2}"><li class="px-4 py-1 hover:bg-gray-500 border-b "><a href="history?id=${sessionScope.acc.idAccount}">BUY HISTORY</a> </li> </c:if> 
+                                        <c:if test="${acc.idRole==1}"><li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="manageProduct">Manage Product</a>  </li> </c:if>
+                                        <c:if test="${acc.idRole==1}"><li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="manageAccount">Manage Account</a>  </li> </c:if>
+                                        <c:if test="${acc.idRole==3}"><li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="manageDelivery?id=${sessionScope.acc.idAccount}">Manage delivery orders</a>  </li> </c:if>
+                                        <c:if test="${acc.idRole!=null}">   <li class="px-4 py-1 hover:bg-gray-500 border-b "> <a href="logout?id=${sessionScope.acc.idAccount}">LOG OUT</a></li></c:if>
                                         </ul>
                                     </div>
                                 </li>

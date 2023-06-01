@@ -260,12 +260,20 @@ public boolean isAccountByEmail(String email) {
         }
     }
     public void addAccountLoginWithGoogle(Account acc) {
-        String sql = "insert account(username, email, roleId)\n" +
-                       "values(?,?,2);";
+        String sql = "INSERT INTO [dbo].[Account]\n" +
+"           ([Username]\n" +
+"           ,[Email]\n" +
+"           ,[roleId]\n" +
+"           ,[avatar]\n" +
+"           ,[active])\n" +
+"     VALUES(?,?,?,?,?);";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1,acc.getUsername() );
             stmt.setString(2, acc.getEmail());
+            stmt.setInt(3, 2);
+            stmt.setString(4,acc.getAvatar());
+            stmt.setInt(5, 1);
             stmt.executeUpdate();
         } catch (Exception e) {
         }
@@ -276,8 +284,6 @@ public boolean isAccountByEmail(String email) {
 //            Account acc = new Account("testlogin", "testlogin@gmail.com");
 //           adb.addAccountLoginWithGoogle(acc);
              Account acc = adb.getAccountByEmail("trinhltnde160563@gmail.com");
-             System.out.println(acc.getEmail() == null);
-             
-
+            System.out.println(adb.isAccountByEmail("haolee2002tst@gmail.com"));
         }
 }

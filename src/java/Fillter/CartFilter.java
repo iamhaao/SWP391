@@ -29,7 +29,7 @@ public class CartFilter implements Filter {
 
     // Check if the user is logged in by checking the session
     HttpSession session = httpRequest.getSession(false);
-    boolean isLoggedIn = (session != null && session.getAttribute("user") != null);
+    boolean isLoggedIn = (session != null && session.getAttribute("acc") != null);
 
     if (isLoggedIn) {
         // User is logged in, allow the request to proceed

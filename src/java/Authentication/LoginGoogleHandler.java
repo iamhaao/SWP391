@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Authentication;
 
 import DAO.AccountDB;
 import com.google.gson.Gson;
@@ -20,6 +20,7 @@ import org.apache.http.client.fluent.Form;
 import DAO.Constants;
 import DAO.OrderDB;
 import DAO.ProductDB;
+import DAO.SendEmail;
 import Models.Account;
 import Models.GoogleUserDto;
 import Models.Order;
@@ -48,16 +49,9 @@ public class LoginGoogleHandler extends HttpServlet {
 			throws ServletException, IOException {
                          HttpSession session = request.getSession();
          
-         ///////
                   AccountDB adb=new AccountDB();
-//                 Account acc = new Account();
                  OrderDB odb = new OrderDB();
                 ProductDB pdb = new ProductDB();
-                List<Order> list = odb.listOrderNotDone();
-                int count1 = list.size();
-                List<Product> bestseller = pdb.bestSeller();
-                List<Product> newproducts = pdb.newProducts();
-//////////////////////////////
 		String code = request.getParameter("code");
 		String accessToken = getToken(code);
 		GoogleUserDto user = getUserInfo(accessToken);
@@ -68,34 +62,26 @@ public class LoginGoogleHandler extends HttpServlet {
 		System.out.println(userName);
                 		System.out.println(email);
 
-                
                  Account acctakeEmail = adb.getAccountByEmail(email);
-                
+                SendEmail sm=new SendEmail();
  //////////////////          
                 if(acctakeEmail.getEmail() == null)    {
-                         Account acc = new Account(userName,email);
+                        Account acc = new Account(1, userName, null, null, email, null, null, 2,"./images/defaultAvt.jpg", 1);
+                        //Sua lai them add 1 tai khoan them nhieu truong 
                         adb.addAccountLoginWithGoogle(acc);
-                                                                        session.setAttribute("user", acctakeEmail);
-
+//                        session.setAttribute("user", acctakeEmail);
                         session.setAttribute("acc", acc);
+                        session.setAttribute("user", acc);
+                        boolean test=sm.CreateAccount(acc);
                         session.setMaxInactiveInterval(12000);
-                        session.setAttribute("sizeShipper", count1);
-                        session.setAttribute("listOrder", list);
-                        session.setAttribute("bestseller", bestseller);
-                        session.setAttribute("newproducts", newproducts);
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-
-                        
+                      
+                        request.getRequestDispatcher("index.jsp").forward(request, response);                       
                 }
                 else{
                         session.setAttribute("acc", acctakeEmail);
-                                                session.setAttribute("user", acctakeEmail);
+                        session.setAttribute("user", acctakeEmail);
 
                         session.setMaxInactiveInterval(12000);
-                        session.setAttribute("sizeShipper", count1);
-                        session.setAttribute("listOrder", list);
-                        session.setAttribute("bestseller", bestseller);
-                        session.setAttribute("newproducts", newproducts);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                 }
                 
@@ -120,7 +106,6 @@ public class LoginGoogleHandler extends HttpServlet {
 		String accessToken = jobj.get("access_token").toString().replaceAll("\"", "");
 		return accessToken;
 	}
-
 	public static GoogleUserDto getUserInfo(final String accessToken) throws ClientProtocolException, IOException {
 		String link = Constants.GOOGLE_LINK_GET_USER_INFO + accessToken;
 		String response = Request.Get(link).execute().returnContent().asString();

@@ -1,14 +1,11 @@
-package Controller;
+package Authentication;
 
 import DAO.AccountDB;
 import Models.Account;
 import Models.Validation;
 import java.io.IOException;
 ;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
