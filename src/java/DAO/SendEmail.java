@@ -151,7 +151,7 @@ public class SendEmail {
             mess.setRecipient(Message.RecipientType.TO,new  InternetAddress(toEmail));
             
             mess.setSubject("Create Account successfull!!");
-            mess.setText("You are created Account in FastBites.Your Username is:"+user.getUsername()+"Your Password is:"+user.getPassword());
+            mess.setText("You are created Account in FastBites.Your Username is:"+user.getUsername());
             
           
 //            

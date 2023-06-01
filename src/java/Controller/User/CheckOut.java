@@ -1,11 +1,15 @@
 
 package Controller.User;
 
+import DAO.CartDB;
+import DAO.CartDetailDB;
 import DAO.OrderDB;
 import DAO.OrderDetailsDB;
+import DAO.SendEmail;
 import DAO.StoreDB;
 import Models.Account;
 import Models.Cart;
+import Models.Cart1;
 import Models.Order;
 import Models.OrderDetails;
 import java.io.IOException;
@@ -30,7 +34,7 @@ public class CheckOut extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session=request.getSession();
+          HttpSession session=request.getSession();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         StoreDB sdb=new StoreDB();
@@ -42,6 +46,9 @@ public class CheckOut extends HttpServlet {
          String idOrder=RandomStringUtils.randomAlphanumeric(6);
          Order order=new Order(idOrder,acc.getIdAccount(), formatter.format(date), total,idStore, address,0,0,0);
          OrderDB odb=new OrderDB();
+         CartDB cdb=new CartDB();
+         Cart1 cart1=(Cart1) session.getAttribute("cartID");
+         CartDetailDB cdtdb=new CartDetailDB();
           if (listCart != null && acc!=null) {
             try {
                 odb.insertOrder(order);
@@ -61,6 +68,7 @@ public class CheckOut extends HttpServlet {
                     }
                 }
                 listCart.clear();
+                cdtdb.deleteAll(cart1.getIdCart());
                 session.removeAttribute("cart_list");
                 request.setAttribute("alert", "Bạn đã đặt hàng thành công!!! ");
                 response.sendRedirect("Success.jsp");
@@ -72,8 +80,7 @@ public class CheckOut extends HttpServlet {
                 } else {
                     response.sendRedirect("Product.jsp");
                 }
-            }
-         
+            }       
     }
 
    
