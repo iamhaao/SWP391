@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Authentication;
 
-
+import DAO.AccountDB;
+import DAO.SendEmail;
 import Models.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,14 +15,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
-
 /**
  *
  * @author LENOVO
  */
-@WebServlet(name = "VerifyCode", urlPatterns = {"/VerifyCode"})
-public class VerifyCode extends HttpServlet {
+@WebServlet(name = "UserVerifyServlet", urlPatterns = {"/UserVerify"})
+public class UserVerifyServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,24 +31,31 @@ public class VerifyCode extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            Account user = (Account) session.getAttribute("authcode");
-            String code = request.getParameter("authcode");
-            String email = request.getParameter("email");
-            
-            if(code.equals(user.getCode())){
-                 request.setAttribute("toEmail", email);
-                 request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
-            }else{
-                request.setAttribute("mess", "Your code verity error! Click fogot password to send code agian!");
-                request.getRequestDispatcher("Login.jsp").forward(request, response);
-
+          String email = request.getParameter("useremail");
+          
+          SendEmail sm = new SendEmail();
+          String code = sm.getRandom();
+          
+          Account user = new Account(email, code);
+          boolean test =sm.sendEmail(user);
+          AccountDB adb = new AccountDB();
+         if(adb.isAccountByEmail(email)){
+            if(test){
+                HttpSession session = request.getSession();
+                session.setAttribute("authcode", user);
+                request.setAttribute("toEmail", email);
+                request.getRequestDispatcher("verify.jsp").forward(request, response);
             }
-       
+          }
+          else{
+                request.setAttribute("mess", "Email is not registered! Please Sign up.");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+            }
+          
         }
     }
 

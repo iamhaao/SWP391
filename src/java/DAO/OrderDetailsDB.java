@@ -1,6 +1,8 @@
 
 package DAO;
 
+import static DAO.DBContext.connection;
+import Models.Cart;
 import Models.OrderDetails;
 import Models.Product;
 import java.sql.PreparedStatement;
@@ -57,5 +59,23 @@ public class OrderDetailsDB extends DBContext{
             System.out.println(orderDetails.toString());
         }
         
+    }
+    public ArrayList<Cart> getBuyAgain(String orderID) {
+        ArrayList<Cart> buyAgain=new ArrayList<>();
+        String sql="select * from OrderDetails where OrderID=?";
+        ProductDB pdb=new ProductDB();
+        try {
+            PreparedStatement stmt=connection.prepareStatement(sql);
+            stmt.setString(1,orderID);
+            ResultSet rs=stmt.executeQuery();
+            while (rs.next()) {                
+                Product p=pdb.getProductByID(rs.getInt(2));
+                Cart c=new Cart(rs.getInt(3), p.getIdProduct(), p.getImage(), p.getDescription(), p.getPrice(), p.getImage(), p.getIdCatory(), p.getQuantity(), p.getCreatedAt());
+                buyAgain.add(c);
+            }
+            
+        } catch (Exception e) {
+        }  
+        return buyAgain;
     }
 }

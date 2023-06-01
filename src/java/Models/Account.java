@@ -16,16 +16,12 @@ public class Account {
      private int active;
      String code;
 
-    public Account(String username, String email) {
-        this.username = username;
+    public Account(String email, String code) {
         this.email = email;
+        this.code = code;
     }
 
-  
-
-   
-  
-     
+    
     public Account(String code) {
         this.code = code;
     }

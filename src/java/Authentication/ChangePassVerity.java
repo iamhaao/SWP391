@@ -2,25 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Authentication;
 
 import DAO.AccountDB;
-import DAO.SendEmail;
-import Models.Account;
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 /**
  *
  * @author LENOVO
  */
-@WebServlet(name = "UserVerifyServlet", urlPatterns = {"/UserVerify"})
-public class UserVerifyServlet extends HttpServlet {
+@WebServlet(name = "ChangePassVerity", urlPatterns = {"/changepassS"})
+public class ChangePassVerity extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,30 +33,19 @@ public class UserVerifyServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-          String email = request.getParameter("useremail");
-          
-          SendEmail sm = new SendEmail();
-          String code = sm.getRandom();
-          
-          Account user = new Account(email,code);
-          boolean test =sm.sendEmail(user);
-          AccountDB adb = new AccountDB();
-         if(adb.isAccountByEmail(email)){
-            if(test){
-                HttpSession session = request.getSession();
-                session.setAttribute("authcode", user);
-                request.setAttribute("toEmail", email);
-                request.getRequestDispatcher("verify.jsp").forward(request, response);
-
-
-
+            String email = request.getParameter("email");
+            String newpass=request.getParameter("newpass");
+            String confirm=request.getParameter("confirm");
+            if(confirm.equals(newpass)){              
+            AccountDB adb = new AccountDB();
+            adb.updateCustomerByEmail( email,newpass);              
+            request.setAttribute("alert", "Change password sussesfull!");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            }else{
+            request.setAttribute("toEmail", email);
+            request.setAttribute("alert", "Newpass and comfirm not same? Enter again!");
+            request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
             }
-          }
-          else{
-                request.setAttribute("mess", "Email is not registered! Please Sign up.");
-                request.getRequestDispatcher("Login.jsp").forward(request, response);
-            }
-          
         }
     }
 

@@ -9,7 +9,7 @@
             <div class="card-body">
                 <div class="row ml-auto">
                     <div class="col-lg-3"> 
-                        <p>Order ID: #${hs.idOrder}</p> <br><!-- comment -->
+                        <p>Order ID:<a href="inforOrder?id=${hs.idOrder}"> #${hs.idOrder}</a></p> <br><!-- comment -->
                         <p>Date : ${hs.date}</p>
                     </div>
                     <div class="col-lg-2">
