@@ -81,21 +81,7 @@ public class LoginGoogleHandler extends HttpServlet {
             session.setAttribute("acc", acc);
             session.setAttribute("user", acc);
             boolean test = sm.CreateAccount(acc);
-            CartDB cdb = new CartDB();
-            Cart1 cart = cdb.checkCart(acc.getIdAccount());
-            session.setAttribute("cartID", cart);
-            if (cart != null) {
-                list = cdtdb.getCart(cart.getIdCart());
-                int size = list.size();
-                session.setAttribute("size", size);
-                session.setAttribute("cart_list", list);
-            } else {
-                Cart1 newCart = new Cart1(RandomStringUtils.randomAlphanumeric(6), acc.getIdAccount());
-                cdb.addNewCart(newCart);
-                Cart1 cart1 = cdb.checkCart(acc.getIdAccount());
-                session.setAttribute("cart_list", list);
-                session.setAttribute("cartID", cart1);
-            }
+            
 //            session.setAttribute("user", acc);
 
             session.setAttribute("acc", acc);
@@ -103,6 +89,21 @@ public class LoginGoogleHandler extends HttpServlet {
             session.setMaxInactiveInterval(12000);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
+            CartDB cdb = new CartDB();
+            Cart1 cart = cdb.checkCart(acctakeEmail.getIdAccount());
+            session.setAttribute("cartID", cart);
+            if (cart != null) {
+                list = cdtdb.getCart(cart.getIdCart());
+                int size = list.size();
+                session.setAttribute("size", size);
+                session.setAttribute("cart_list", list);
+            } else {
+                Cart1 newCart = new Cart1(RandomStringUtils.randomAlphanumeric(6), acctakeEmail.getIdAccount());
+                cdb.addNewCart(newCart);
+                Cart1 cart1 = cdb.checkCart(acctakeEmail.getIdAccount());
+                session.setAttribute("cart_list", list);
+                session.setAttribute("cartID", cart1);
+            }
             session.setAttribute("acc", acctakeEmail);
             session.setAttribute("user", acctakeEmail);
 
