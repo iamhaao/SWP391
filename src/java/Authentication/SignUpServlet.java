@@ -1,4 +1,4 @@
-package Controller;
+package Authentication;
 
 import DAO.AccountDB;
 import Models.Account;

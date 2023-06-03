@@ -2,26 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Authentication;
 
-
-import Models.Account;
-import java.io.IOException;
-import java.io.PrintWriter;
+import DAO.AccountDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
  * @author LENOVO
  */
-@WebServlet(name = "VerifyCode", urlPatterns = {"/VerifyCode"})
-public class VerifyCode extends HttpServlet {
+@WebServlet(name = "ChangePassVerity", urlPatterns = {"/changepassS"})
+public class ChangePassVerity extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,24 +29,23 @@ public class VerifyCode extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession();
-            Account user = (Account) session.getAttribute("authcode");
-            String code = request.getParameter("authcode");
             String email = request.getParameter("email");
-            
-            if(code.equals(user.getCode())){
-                 request.setAttribute("toEmail", email);
-                 request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
+            String newpass=request.getParameter("newpass");
+            String confirm=request.getParameter("confirm");
+            if(confirm.equals(newpass)){              
+            AccountDB adb = new AccountDB();
+            adb.updateCustomerByEmail( email,newpass);              
+            request.setAttribute("alert", "Change password sussesfull!");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
             }else{
-                request.setAttribute("mess", "Your code verity error! Click fogot password to send code agian!");
-                request.getRequestDispatcher("Login.jsp").forward(request, response);
-
+            request.setAttribute("toEmail", email);
+            request.setAttribute("alert", "Newpass and comfirm not same? Enter again!");
+            request.getRequestDispatcher("ChangePass.jsp").forward(request, response);
             }
-       
         }
     }
 

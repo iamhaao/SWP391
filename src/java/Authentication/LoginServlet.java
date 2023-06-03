@@ -1,13 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-package Controller;
+
+package Authentication;
 
 import DAO.AccountDB;
+import DAO.CartDB;
+import DAO.CartDetailDB;
 import DAO.OrderDB;
 import DAO.ProductDB;
 import Models.Account;
+import Models.Cart;
+import Models.Cart1;
 import Models.Order;
 import Models.Product;
 import java.io.IOException;
@@ -21,6 +22,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class LoginServlet extends HttpServlet {
 
@@ -30,10 +32,14 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("user");
+              String user = request.getParameter("user");
         String pass = request.getParameter("pass");
         String remember = request.getParameter("rem");
         AccountDB adb=new AccountDB();
+         HttpSession session = request.getSession();
+        CartDB cdb=new CartDB();
+        CartDetailDB cdtdb=new CartDetailDB();
+        List<Cart> list=null;
         Account acc=null;
         ProductDB pdb=new ProductDB();
         Cookie cookieUser = new Cookie("cuser", user);
@@ -62,13 +68,27 @@ public class LoginServlet extends HttpServlet {
             response.addCookie(cookiePass);
             response.addCookie(cookieRem);
             
-            
-            HttpSession session = request.getSession();
-            session.setAttribute("user", acc);
-            session.setAttribute("rem", remember);
-            
+            Cart1 cart= cdb.checkCart(acc.getIdAccount());
+            session.setAttribute("cartID", cart);
+            if(cart!=null){
+              list=cdtdb.getCart(cart.getIdCart());
+              int size=list.size();
+              session.setAttribute("size", size);
+              session.setAttribute("cart_list", list);
+            }else{
+              Cart1 newCart=new Cart1(RandomStringUtils.randomAlphanumeric(6), acc.getIdAccount());
+              cdb.addNewCart(newCart);
+              Cart1 cart1= cdb.checkCart(acc.getIdAccount());
+              session.setAttribute("cart_list", list);
+              session.setAttribute("cartID", cart1);
+            }
+//            session.setAttribute("user", acc);
+            session.setAttribute("rem", remember);                    
             session.setAttribute("acc", acc);
             request.getRequestDispatcher("index.jsp").forward(request, response);
+            
+            
+            
            }else{
              request.setAttribute("alert", "Your Account has been blocked");
             request.getRequestDispatcher("Login.jsp").forward(request, response);

@@ -30,7 +30,7 @@
 
                                 </div>
                                 <div class="d-flex">
-                                    <button class="btn btn-link p-0 me-3 d-none d-lg-block btn-icon-text"><i class="bi bi-download"></i> <span class="text">Back</span></button>
+                                <c:if test="${sessionScope.acc.idRole==2}">  <button class="bg-info border rounded px-2 text-light"><i class=""></i> <a href="buyAgain?id=${order.idOrder}">BUY AGAIN</a></button> </c:if> 
                                     <div class="dropdown">
                                         <button class="btn btn-link p-0 text-muted" type="button" data-bs-toggle="dropdown">
                                             <i class="bi bi-three-dots-vertical"></i>

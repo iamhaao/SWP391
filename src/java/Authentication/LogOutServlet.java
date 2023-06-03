@@ -1,5 +1,5 @@
 
-package Controller;
+package Authentication;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;

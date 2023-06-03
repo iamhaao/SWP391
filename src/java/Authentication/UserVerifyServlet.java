@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package Controller;
+package Authentication;
 
 import DAO.AccountDB;
 import DAO.SendEmail;
@@ -49,9 +49,6 @@ public class UserVerifyServlet extends HttpServlet {
                 session.setAttribute("authcode", user);
                 request.setAttribute("toEmail", email);
                 request.getRequestDispatcher("verify.jsp").forward(request, response);
-
-
-
             }
           }
           else{

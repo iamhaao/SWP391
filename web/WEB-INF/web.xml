@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>Controller.LoginServlet</servlet-class>
+        <servlet-class>Authentication.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CheckOut</servlet-name>
@@ -34,7 +34,7 @@
     </servlet>
     <servlet>
         <servlet-name>SignUpServlet</servlet-name>
-        <servlet-class>Controller.SignUpServlet</servlet-class>
+        <servlet-class>Authentication.SignUpServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RemoveCartServlet</servlet-name>
@@ -42,7 +42,7 @@
     </servlet>
     <servlet>
         <servlet-name>LogOutServlet</servlet-name>
-        <servlet-class>Controller.LogOutServlet</servlet-class>
+        <servlet-class>Authentication.LogOutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PreviewProductServlet</servlet-name>
@@ -90,7 +90,7 @@
     </servlet>
     <servlet>
         <servlet-name>ChangePasswordServlet</servlet-name>
-        <servlet-class>Controller.ChangePasswordServlet</servlet-class>
+        <servlet-class>Authentication.ChangePasswordServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BuyHistoryServlet</servlet-name>
@@ -200,6 +200,10 @@
         <servlet-name>LoginFillter</servlet-name>
         <url-pattern>/LoginFillter</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>BuyAgainServlet</servlet-name>
+        <servlet-class>Controller.User.BuyAgainServlet</servlet-class>
+    </servlet>
     <filter>
         <filter-name>CartFilter</filter-name>
         <filter-class>Fillter.CartFilter</filter-class>
@@ -224,6 +228,10 @@
         <filter-name>CartFilter</filter-name>
         <url-pattern>/profile</url-pattern>
     </filter-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyAgainServlet</servlet-name>
+        <url-pattern>/buyAgain</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

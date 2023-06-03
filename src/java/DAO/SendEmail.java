@@ -20,7 +20,7 @@ import javax.mail.internet.MimeMessage;
  * @author LENOVO
  */
 public class SendEmail {
-    public String getRandom(){
+        public String getRandom(){
          Random rnd = new Random();
          int number = rnd.nextInt(99999);
          return  String.format("%06d", number);
@@ -37,7 +37,7 @@ public class SendEmail {
 		props.put("mail.smtp.port", "587"); // TLS 587 SSL 465
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.starttls.enable", "true");
-                final String from = "trinhlethinguyen154@gmail.com";
+                    final String from = "trinhlethinguyen154@gmail.com";
                 final String password = "mvsojzbfulhwulrv";
                 
             Session session = Session.getInstance(props,new Authenticator() {
@@ -55,7 +55,11 @@ public class SendEmail {
             mess.setRecipient(Message.RecipientType.TO,new  InternetAddress(toEmail));
             
             mess.setSubject("User Email Verification");
+
             mess.setText("Ma cu ban la:"+user.getCode());
+
+            mess.setText("Your verification code is:"+user.getCode());
+
  
           
 //            
@@ -123,5 +127,87 @@ public class SendEmail {
         }
         return test;
     }
-    
+        public  boolean CreateAccount( Account user){
+        boolean test = false;
+        String toEmail= user.getEmail();
+//        String fromEmail = "trinhltnde160563@fpt.edu.vn";
+//        String password = "lethinguyentrinh154";
+        try{
+            Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com"); // SMTP HOST
+		props.put("mail.smtp.port", "587"); // TLS 587 SSL 465
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+                    final String from = "trinhlethinguyen154@gmail.com";
+                final String password = "mvsojzbfulhwulrv";
+                
+            Session session = Session.getInstance(props,new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication(){
+                    return new PasswordAuthentication(from, password);
+                }
+            });
+
+            Message mess = new MimeMessage(session);
+            
+            
+            mess.setFrom(new InternetAddress(from));
+            mess.setRecipient(Message.RecipientType.TO,new  InternetAddress(toEmail));
+            
+            mess.setSubject("Create Account successfull!!");
+            mess.setText("You are created Account in FastBites.Your Username is:"+user.getUsername());
+            
+          
+//            
+            
+            Transport.send(mess);
+            test = true;
+        }catch(Exception e){
+            System.out.println("Gặp lỗi trong quá trình gửi email");
+			e.printStackTrace();
+			return false;
+        }
+        return test;
+    }
+     public  boolean CheckOut( String idOrder,String email){
+        boolean test = false;
+        String toEmail= email;
+//        String fromEmail = "trinhltnde160563@fpt.edu.vn";
+//        String password = "lethinguyentrinh154";
+
+        try{
+            Properties props = new Properties();
+		props.put("mail.smtp.host", "smtp.gmail.com"); // SMTP HOST
+		props.put("mail.smtp.port", "587"); // TLS 587 SSL 465
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+                    final String from = "trinhlethinguyen154@gmail.com";
+                final String password = "mvsojzbfulhwulrv";
+                
+            Session session = Session.getInstance(props,new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication(){
+                    return new PasswordAuthentication(from, password);
+                }
+            });
+
+            Message mess = new MimeMessage(session);
+            
+            
+            mess.setFrom(new InternetAddress(from));
+            mess.setRecipient(Message.RecipientType.TO,new  InternetAddress(toEmail));
+            
+            mess.setSubject("Check Out Successfull");
+            mess.setText("You are payment successfull OrderID: :"+idOrder+".Thank You Sâu mợt");                    
+//                      
+            Transport.send(mess);
+            test = true;
+        }catch(Exception e){
+            System.out.println("Gặp lỗi trong quá trình gửi email");
+			e.printStackTrace();
+			return false;
+        }
+        return test;
+    }   
 }
+
