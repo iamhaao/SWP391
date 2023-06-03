@@ -40,7 +40,7 @@ public class UserVerifyServlet extends HttpServlet {
           SendEmail sm = new SendEmail();
           String code = sm.getRandom();
           
-          Account user = new Account(email,code);
+          Account user = new Account(email, code);
           boolean test =sm.sendEmail(user);
           AccountDB adb = new AccountDB();
          if(adb.isAccountByEmail(email)){

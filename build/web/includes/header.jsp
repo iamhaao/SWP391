@@ -40,6 +40,52 @@
                 content-visibility: auto;
             }
         }
+.star-rating {
+  line-height:32px;
+  font-size:1.25em;
+  color:  #e2e22c;
+}
+
+.star-rating .fa-star{color: yellow;}
+
+.pagination{
+display: flex;
+align-items: center;
+justify-content: center;
+list-style: none;
+margin-top: 50px;
+margin-bottom: 50px;
+}
+
+.pagination-item{
+    margin: 0 ;
+
+}
+.pagination-item__link{
+--height: 30px;
+display: block;
+color: #939393;
+text-decoration: none;
+font-size: 2rem;
+font-weight: 600;
+padding: 20px;
+margin: 2px;
+min-width: 40px;
+text-align: center;
+border-radius: 3px;
+}
+.pagination-item--active .pagination-item__link{
+    background-color:#bd2130;
+    color: white;
+
+}
+.pagination-item--active .pagination-item__link:hover{
+    background-color: rgb(223, 98, 44);
+}
+.pagination-item__icon{
+
+}
+
     </style>
     <body>
         <div class="container">

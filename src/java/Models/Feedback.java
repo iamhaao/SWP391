@@ -24,11 +24,14 @@ public class Feedback {
         this.rating = rating;
     }
 
-    public Feedback(int accountID, int productID, String script) {
+    public Feedback(int accountID, int productID, String script, int rating) {
         this.accountID = accountID;
         this.productID = productID;
         this.script = script;
+        this.rating = rating;
     }
+
+   
 
     public Feedback() {
     }

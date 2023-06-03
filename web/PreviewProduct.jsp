@@ -3,7 +3,7 @@
     Created on : May 15, 2023, 4:05:36 AM
     Author     : ACER NITRO
 --%>
-
+<%@taglib prefix="my" uri="/WEB-INF/tlds/customtaglid" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="./includes/header.jsp" %>
 <body>
@@ -28,13 +28,7 @@
                     <div class="details col-md-6">
                         <h3 class="product-title">${p.name}</h3>
                         <div class="rating">
-                            <div class="stars">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                            </div>
+                            <div><my:Rating min="0" max="5" num="${avgRating}"/></div>
                             <span class="review-no">41 reviews </span>
                         </div>
                         <p class="product-description">${p.description} </p>
@@ -54,23 +48,36 @@
         <div class="container">   
             <div class="row">
                 <div class="col-sm-8">   
+                     <c:if test="${sessionScope.acc.idAccount != null}">
                     <form action="feedback" method="GET">
                         <h3 class="pull-left">New Comment</h3>
+                        
                         <button type="submit" class="btn btn-normal pull-right">Submit</button>
                         <fieldset>
                             <div class="row">
                                 <div class="col-sm-3 col-lg-2 hidden-xs">
-                                    <img class="img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                    <img class="img-responsive" src="${sessionScope.acc.avatar}" alt="">
                                 </div>
                                 <div class="form-group col-xs-12 col-sm-9 col-lg-10">
                                     <input value="${p.idProduct}" name="idProduct"class="text-white">
+                                    <div class="star-rating">
+                                            <span class="fa fa-star-o" data-rating="1"></span>
+                                            <span class="fa fa-star-o" data-rating="2"></span>
+                                            <span class="fa fa-star-o" data-rating="3"></span>
+                                            <span class="fa fa-star-o" data-rating="4"></span>
+                                            <span class="fa fa-star-o" data-rating="5"></span>
+                                            <input type="hidden" name="whatever1" class="rating-value" value="5">
+                                    </div>
                                     <textarea name="comment" class="form-control" id="message" placeholder="Your message" required=""></textarea>
+                      
                                 </div>
                             </div>  	
                         </fieldset>
+                          
                     </form>
+                    </c:if>
 
-                    <h3>4 Comments</h3>
+                    <h3>Comments:</h3>
 
                     <!-- COMMENT 1 - START -->
                     
@@ -88,10 +95,10 @@
                      <c:forEach items="${listFb}" var="fb">
                         
                             <div class="media">
-
+                                
                                 <a class="pull-left" href="#"><img class="media-object" src="https://bootdey.com/img/Content/avatar/avatar4.png" alt=""></a>
                                 <div class="media-body">
-                                    <h4 class="media-heading">${fb.accountID}</h4>
+                                    <div><my:Rating min="0" max="5" num="${fb.rating}"/></div>
                                     <p>${fb.script}</p>
                                     <ul class="list-unstyled list-inline media-detail pull-left">
                                         <li><i class="fa fa-calendar"></i>${fb.date}</li>
@@ -109,5 +116,29 @@
             </div>
         </div>
     </section>
+<script>
+var $star_rating = $('.star-rating .fa');
+
+var SetRatingStar = function() {
+  return $star_rating.each(function() {
+    if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
+      return $(this).removeClass('fa-star-o').addClass('fa-star');
+    } else {
+      return $(this).removeClass('fa-star').addClass('fa-star-o');
+    }
+  });
+};
+
+$star_rating.on('click', function() {
+  $star_rating.siblings('input.rating-value').val($(this).data('rating'));
+  return SetRatingStar();
+});
+
+SetRatingStar();
+$(document).ready(function() {
+
+});
+</script>
+
 </body>
 <%@include file="./includes/footer.jsp" %>

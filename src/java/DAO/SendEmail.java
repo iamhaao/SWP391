@@ -55,7 +55,7 @@ public class SendEmail {
             mess.setRecipient(Message.RecipientType.TO,new  InternetAddress(toEmail));
             
             mess.setSubject("User Email Verification");
-            mess.setText(user.getCode());
+            mess.setText("Ma cu ban la:"+user.getCode());
  
           
 //            

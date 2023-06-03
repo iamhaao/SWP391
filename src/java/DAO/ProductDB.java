@@ -53,15 +53,43 @@ public class ProductDB extends DBContext {
         }
 
         return products;
+    };
+     public int getTotaProduct() {
+        String sql = "select count(*) from Product";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+     public List<Product> pagingProduct(int index) {
+        List<Product> products = new ArrayList<>();
+        String sql = "select * from product order by ProductID offset ? rows fetch next 6 rows only";
+        try {
+           PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, (index - 1) * 6);
+           ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getString(8));
+                products.add(p);
+
+            }
+        } catch (Exception e) {
+        }
+        return products;
     }
 
-    ;
-
-    public List<Product> getProductByType(int id) {
+    public List<Product> getProductByType(int id, int index) {
         List<Product> products = new ArrayList<>();
         String sql = "select * from Product ";
         if (id == 0) {
-            sql += "order by CreatedAt desc";
+            sql += "product order by ProductID offset "+((index - 1) * 8)+" rows fetch next 8 rows only";
         } else {
             sql += " where CategoryId=" + id+"order by CreatedAt desc";
         }
@@ -135,13 +163,13 @@ public class ProductDB extends DBContext {
 
     public static void main(String[] args) {
         ProductDB pdb = new ProductDB();
-        List<Product> products = pdb.getAll();
+//        List<Product> products = pdb.getAll();
 
 //        Product p = pdb.getProductByID(12);
 //        System.out.println(p.toString());
-        List<Product> best = pdb.bestSeller();
+        List<Product> products = pdb.getProductByType(3, 0);
         for (Product product : products) {
-            System.out.println(product.toString());
+            System.out.println(product);
         }
     }
 
@@ -160,7 +188,7 @@ public class ProductDB extends DBContext {
         }
         return sum;
     }
-
+    
     public List<Product> bestSeller() {
         ArrayList<Product> bestseller = new ArrayList<>();
         ArrayList<Integer> list = new ArrayList<>();
