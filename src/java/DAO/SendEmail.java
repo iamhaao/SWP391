@@ -20,7 +20,7 @@ import javax.mail.internet.MimeMessage;
  * @author LENOVO
  */
 public class SendEmail {
-    public String getRandom(){
+        public String getRandom(){
          Random rnd = new Random();
          int number = rnd.nextInt(99999);
          return  String.format("%06d", number);
@@ -55,7 +55,11 @@ public class SendEmail {
             mess.setRecipient(Message.RecipientType.TO,new  InternetAddress(toEmail));
             
             mess.setSubject("User Email Verification");
+
+            mess.setText("Ma cu ban la:"+user.getCode());
+
             mess.setText("Your verification code is:"+user.getCode());
+
  
           
 //            
@@ -206,3 +210,4 @@ public class SendEmail {
         return test;
     }   
 }
+

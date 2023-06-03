@@ -41,33 +41,26 @@ public class FeedbackServlet extends HttpServlet {
             throws ServletException, IOException {
         int id=Integer.parseInt(request.getParameter("idProduct"));
         String comment = request.getParameter("comment");
+        int whatever1 = Integer.parseInt(request.getParameter("whatever1"));
         HttpSession session = request.getSession();
         ProductDB pdb=new ProductDB();
         Product p=pdb.getProductByID(id);
         FeedbackDB fdb= new FeedbackDB();
         Account a = (Account)session.getAttribute("acc");
-        if(a== null){
-//           
-//        
-//        
-         List<Feedback> listFb = fdb.getAllFeedback(id);
         
+       
         
+        int idAcc = a.getIdAccount();
+        Feedback fb = new Feedback(idAcc, id ,comment,whatever1);
+        fdb.addFeedback(fb);
+        List<Feedback> listFb = fdb.getAllFeedback(id);
+         int avgRating = fdb.avgRating(id);
+        request.setAttribute("avgRating", avgRating);
         request.setAttribute("listFb", listFb);
         request.setAttribute("p", p);
-        request.getRequestDispatcher("PreviewProduct.jsp").forward(request, response);      
-        }
-        else{
-         int idAcc = a.getIdAccount();
-         Feedback fb = new Feedback(idAcc, id ,comment);
-         fdb.addFeedback(fb);
-          List<Feedback> listFb = fdb.getAllFeedback(id);
-        
-        
-        request.setAttribute("listFb", listFb);
-        request.setAttribute("p", p);
+         request.setAttribute("whatever1",whatever1 );
         request.getRequestDispatcher("PreviewProduct.jsp").forward(request, response);
-        }
+        
         
     }
 

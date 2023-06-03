@@ -60,6 +60,33 @@
                 </div>
             </c:forEach>
         </div>
+       
+                                         <ul class="pagination home-product__pagination">
+                                       
+                                        
+                                            <c:forEach begin="1" end="${endPage}" var="i">
+                                                <c:if test="${i eq 1}">
+                                                        <li class="paginatio-item">
+                                                        <a href="products?nameSearch&choose=0&index=${i}" class="pagination-item__link">
+                                                            <i class="pagination-item__icon fa-solid fa-angle-left"></i>
+                                                        </a>
+                                                        </li>
+                                                </c:if>
+                                                    <li class="pagination-item pagination-item--active">
+                                                        <a href="products?nameSearch&choose=0&index=${i}" class="pagination-item__link ">
+                                                        ${i}
+                                                        </a>
+                                                    </li>
+                                                <c:if test="${i eq endPage}">
+                                                    <li class="paginatio-item">
+                                                        <a href="products?nameSearch&choose=0&index=${i}" class="pagination-item__link">
+                                                           <i class="pagination-item__icon fa-solid fa-angle-right"></i>
+                                                        </a>
+                                                        </li>
+                                                </c:if>
+                                            </c:forEach>
+                                        
+                                        </ul>
     </div>
 </main>
  <%@include file="/includes/footer.jsp" %>

@@ -37,16 +37,19 @@ public class PreviewProductServlet extends HttpServlet {
 
             List<Feedback> listFb = fdb.getAllFeedback(id);
 
-
+           int avgRating = fdb.avgRating(id);
            request.setAttribute("listFb", listFb);
            request.setAttribute("p", p);
+           request.setAttribute("avgRating", avgRating);
            request.getRequestDispatcher("PreviewProduct.jsp").forward(request, response);      
         }
         else{
              List<Feedback> listFb = fdb.getAllFeedback(id);
-             
+            int avgRating = fdb.avgRating(id);
+             request.setAttribute("avgRating", avgRating);
             request.setAttribute("listFb", listFb);
             request.setAttribute("p", p);
+           
             request.getRequestDispatcher("PreviewProduct.jsp").forward(request, response); 
 
         }

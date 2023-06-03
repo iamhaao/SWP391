@@ -42,7 +42,7 @@ public class GetEmailSendEvent extends HttpServlet {
           SendEmail sm = new SendEmail();
           String code = sm.getRandom();
           
-          Account user = new Account(email,code);
+          Account user = new Account(email, code);
           boolean test =sm.sendEventEmail(user);
           AccountDB adb = new AccountDB();
          if(adb.isAccountByEmail(email)){

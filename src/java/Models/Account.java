@@ -1,9 +1,14 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package Models;
 
-
+/**
+ *
+ * @author LENOVO
+ */
 public class Account {
-  
     private int idAccount;
      private String username;
      private String password;
@@ -16,28 +21,7 @@ public class Account {
      private int active;
      String code;
 
-    public Account(String email, String code) {
-        this.email = email;
-        this.code = code;
-    }
-
-    
-    public Account(String code) {
-        this.code = code;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Account() {
-    }
-
-    public Account(int idAccount, String username, String password, String name, String email, String address, String phone, int idRole, String avatar,int active) {
+    public Account(int idAccount, String username, String password, String name, String email, String address, String phone, int idRole, String avatar, int active, String code) {
         this.idAccount = idAccount;
         this.username = username;
         this.password = password;
@@ -47,29 +31,12 @@ public class Account {
         this.phone = phone;
         this.idRole = idRole;
         this.avatar = avatar;
-        this.active=active;
-    }
-
-    public int getActive() {
-        return active;
-    }
-
-    public void setActive(int active) {
         this.active = active;
+        this.code = code;
     }
 
-    
-    
-    
-    public String getAvatar() {
-        return avatar;
+    public Account() {
     }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
- 
 
     public int getIdAccount() {
         return idAccount;
@@ -135,11 +102,35 @@ public class Account {
         this.idRole = idRole;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String toString() {
-        return "Account{" + "idAccount=" + idAccount + ", username=" + username + ", password=" + password + ", name=" + name + ", email=" + email + ", address=" + address + ", phone=" + phone + ", idRole=" + idRole + '}';
+        return "Account{" + "idAccount=" + idAccount + ", username=" + username + ", password=" + password + ", name=" + name + ", email=" + email + ", address=" + address + ", phone=" + phone + ", idRole=" + idRole + ", avatar=" + avatar + ", active=" + active + ", code=" + code + '}';
     }
-     
+    
      
     
 }
