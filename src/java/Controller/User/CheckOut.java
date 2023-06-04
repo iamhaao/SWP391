@@ -74,6 +74,8 @@ public class CheckOut extends HttpServlet {
                 response.sendRedirect("Success.jsp");
                 int size = listCart.size();
                 session.setAttribute("size", size);
+
+                
             } else {
                 if (acc==null) {
                     response.sendRedirect("Login.jsp");

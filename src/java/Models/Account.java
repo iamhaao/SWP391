@@ -14,11 +14,20 @@ public class Account {
      private int idRole;
      private String avatar;
      private int active;
+     private int royal;
      String code;
 
     public Account(String email, String code) {
         this.email = email;
         this.code = code;
+    }
+
+    public int getRoyal() {
+        return royal;
+    }
+
+    public void setRoyal(int royal) {
+        this.royal = royal;
     }
 
     
@@ -37,7 +46,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(int idAccount, String username, String password, String name, String email, String address, String phone, int idRole, String avatar,int active) {
+    public Account(int idAccount, String username, String password, String name, String email, String address, String phone, int idRole, String avatar,int active,int royal) {
         this.idAccount = idAccount;
         this.username = username;
         this.password = password;
@@ -48,6 +57,7 @@ public class Account {
         this.idRole = idRole;
         this.avatar = avatar;
         this.active=active;
+        this.royal=royal;
     }
 
     public int getActive() {

@@ -100,9 +100,24 @@
                                     after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:ease-out after:duration-300">
                                     <a href="Delivery.jsp" class="d-flex">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+                                        </svg>
+                                        <span class="mx-2">Shipping</span>
+                                        <span class="text-sx text-center rounded-full px-1.5 bg-orange-500 text-white">${sessionScope.sizeShipper}</span>
+                                    </a>
+                                </li> 
+                            </c:if>
+                            <c:if test="${sessionScope.acc.idRole==1}">
+                                <li
+                                    class="cursor-pointer py-1 hover:text-gray-800 relative after:absolute after:bottom-0 after:left-0 after:bg-slate-900
+                                    after:h-0.5 after:w-0 hover:after:w-full after:transition-all after:ease-out after:duration-300">
+                                    <a href="ConfirmOrder.jsp" class="d-flex">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0M3.124 7.5A8.969 8.969 0 015.292 3m13.416 0a8.969 8.969 0 012.168 4.5" />
                                         </svg>
-                                        <span class="text-sx text-center rounded-full px-1.5 bg-orange-500 text-white">${sessionScope.sizeShipper}</span>
+
+                                        <span class="mx-2">Orders</span>
+                                        <span class="text-sx text-center rounded-full px-1.5 bg-orange-500 text-white">${sessionScope.sizeConfirm}</span>
                                     </a>
                                 </li> 
                             </c:if>

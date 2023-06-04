@@ -34,7 +34,7 @@ public class UpdateProfileServlet extends HttpServlet {
             request.setAttribute("alert", "Phone is required 10 digit ");
             request.getRequestDispatcher("EditProfile.jsp").forward(request, response);
         } else {
-            Account acc = new Account(c.getIdAccount(), user, pass, name, email, address, phone, c.getIdRole(), c.getAvatar(), 1);
+            Account acc = new Account(c.getIdAccount(), user, pass, name, email, address, phone, c.getIdRole(), c.getAvatar(), 1,c.getRoyal());
             adb.updateCustomer(acc);
             session.removeAttribute("acc");
             Account acc1 = adb.getAccountByUsername(user);

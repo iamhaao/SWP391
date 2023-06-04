@@ -20,7 +20,7 @@ public class ManageOrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         OrderManageDB omdb=new OrderManageDB();
-        List<OrderManage> list=omdb.getAll();
+         List<OrderManage> list=omdb.getAll();
         request.setAttribute("manageOrder", list);
         request.getRequestDispatcher("ManagerOrder.jsp").forward(request, response);       
     }

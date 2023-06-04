@@ -87,7 +87,7 @@
                 <div class="divider d-flex align-items-center my-4">
             <p class="text-center fw-bold mx-3 mb-0 text-muted" style="display: inline-block; padding-left:  180px">OR</p>
           </div>
-           <a  class="btn btn-primary btn-lg btn-block" style="background-color: #55acee;" href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/SWP391/LoginGoogleHandler&response_type=code&client_id=876393109162-qq2f685854i38o0mjnmb8690kgd0c202.apps.googleusercontent.com&approval_prompt=force"
+           <a  class="btn btn-primary btn-lg btn-block" style="background-color: #b21f2d;" href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/SWP391/LoginGoogleHandler&response_type=code&client_id=876393109162-qq2f685854i38o0mjnmb8690kgd0c202.apps.googleusercontent.com&approval_prompt=force"
             role="button">
             <i class="fab fa-google me-2"></i>Login with Google
            </a>

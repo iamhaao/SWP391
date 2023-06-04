@@ -73,22 +73,32 @@ public class LoginGoogleHandler extends HttpServlet {
         Account acctakeEmail = adb.getAccountByEmail(email);
         SendEmail sm = new SendEmail();
         //////////////////          
-        if (acctakeEmail.getEmail() == null) {
-            Account acc = new Account(1, userName, null, null, email, null, null, 2, "./images/defaultAvt.jpg", 1);
+        if (acctakeEmail.getEmail()== null) {
+            Account acc = new Account(1, userName, null, null, email, null, null, 2, "./images/defaultAvt.jpg", 1, 1);
             //Sua lai them add 1 tai khoan them nhieu truong 
             adb.addAccountLoginWithGoogle(acc);
 //                        session.setAttribute("user", acctakeEmail);
             session.setAttribute("acc", acc);
             session.setAttribute("user", acc);
             boolean test = sm.CreateAccount(acc);
-            
-//            session.setAttribute("user", acc);
 
+//            session.setAttribute("user", acc);
             session.setAttribute("acc", acc);
             request.getRequestDispatcher("index.jsp").forward(request, response);
             session.setMaxInactiveInterval(12000);
             request.getRequestDispatcher("index.jsp").forward(request, response);
         } else {
+            if (acctakeEmail.getIdRole() == 1) {
+                List<Order> listOrderConfirm = odb.getListConfirm();
+                int sizeConfirm = listOrderConfirm.size();
+                session.setAttribute("sizeConfirm", sizeConfirm);
+                session.setAttribute("listConfirm", listOrderConfirm);
+            } else if (acctakeEmail.getIdRole() == 3) {
+                List<Order> list1 = odb.listOrderNotDone();
+                int count1 = list1.size();
+                session.setAttribute("sizeShipper", count1);
+                session.setAttribute("listOrder", list1);
+            }
             CartDB cdb = new CartDB();
             Cart1 cart = cdb.checkCart(acctakeEmail.getIdAccount());
             session.setAttribute("cartID", cart);

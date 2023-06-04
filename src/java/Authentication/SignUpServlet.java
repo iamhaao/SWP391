@@ -60,7 +60,7 @@ public class SignUpServlet extends HttpServlet {
                 request.setAttribute("alert", "Pass is required grather than 6 character ");
                 request.getRequestDispatcher("SignUp.jsp").forward(request, response);
             }else{
-            Account acc = new Account(role, username, password, name, email, address, phone, role, avatar, 1);
+            Account acc = new Account(role, username, password, name, email, address, phone, role, avatar, 1,1);
             adb.addAccount(acc);
             request.setAttribute("alert", "You have successfully registered, Login now");
             request.getRequestDispatcher("SignUp.jsp").forward(request, response);

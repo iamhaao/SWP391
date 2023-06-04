@@ -16,7 +16,7 @@ public class AccountDB extends DBContext {
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Account acc = new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getInt(10));
+                Account acc = new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8), rs.getString(9), rs.getInt(10),rs.getInt(11));
                 listAccount.add(acc);
             }
         } catch (Exception e) {
@@ -45,6 +45,7 @@ public class AccountDB extends DBContext {
                 acc.setIdRole(rs.getInt(8));
                 acc.setAvatar(rs.getString(9));
                 acc.setActive(rs.getInt(10));
+                acc.setRoyal(rs.getInt(11));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -69,6 +70,7 @@ public class AccountDB extends DBContext {
                 acc.setIdRole(rs.getInt(8));
                 acc.setAvatar(rs.getString(9));
                 acc.setActive(rs.getInt(10));
+                acc.setRoyal(rs.getInt(11));
             }
         } catch (Exception e) {
             System.out.println(e);
@@ -133,8 +135,9 @@ public class AccountDB extends DBContext {
                 + "           ,[Phone]\n"
                 + "           ,[roleId]\n"
                 + "           ,[avatar]"
-                + "            ,[active])\n"
-                + "     VALUES(?,?,?,?,?,?,?,?,?)";
+                + "            ,[active]\n"
+                + "             ,[royal]) "
+                + "     VALUES(?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, acc.getUsername());
@@ -146,6 +149,7 @@ public class AccountDB extends DBContext {
             stmt.setInt(7, acc.getIdRole());
             stmt.setString(8, acc.getAvatar());
             stmt.setInt(9, 1);
+            stmt.setInt(10, 1);
             stmt.executeUpdate();
         } catch (Exception e) {
         }
@@ -169,6 +173,7 @@ public class AccountDB extends DBContext {
                 acc.setIdRole(rs.getInt(8));
                 acc.setAvatar(rs.getString(9));
                 acc.setActive(rs.getInt(10));
+                acc.setRoyal(rs.getInt(11));
             }
         } catch (Exception e) {
         }
@@ -204,6 +209,7 @@ public class AccountDB extends DBContext {
                 acc.setIdRole(rs.getInt(8));
                 acc.setAvatar(rs.getString(9));
                 acc.setActive(rs.getInt(10));
+                acc.setRoyal(rs.getInt(11));
             }
         } catch (Exception e) {
         }
@@ -286,4 +292,15 @@ public boolean isAccountByEmail(String email) {
              Account acc = adb.getAccountByEmail("trinhltnde160563@gmail.com");
             System.out.println(adb.isAccountByEmail("haolee2002tst@gmail.com"));
         }
+
+    public void updateRoyal(int idAccount, int royal) {
+        String sql="Update Account set royal=? where AccountID=?";
+        try {
+             PreparedStatement stmt=connection.prepareStatement(sql);
+             stmt.setInt(1, royal);
+             stmt.setInt(2, idAccount);
+             stmt.executeUpdate();
+        } catch (Exception e) {
+        }      
+    }
 }
