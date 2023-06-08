@@ -39,16 +39,28 @@ public class CheckOut extends HttpServlet {
         Date date = new Date();
         StoreDB sdb=new StoreDB();
         String address=request.getParameter("address");
+<<<<<<< HEAD
+=======
+        int payment =Integer.parseInt(request.getParameter("payment"));
+>>>>>>> main
         int idStore=Integer.parseInt(request.getParameter("store"));
          ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("cartProducts");
          Account acc=(Account) session.getAttribute("acc");
          Double total=(Double) session.getAttribute("total");
          String idOrder=RandomStringUtils.randomAlphanumeric(6);
+<<<<<<< HEAD
          Order order=new Order(idOrder,acc.getIdAccount(), formatter.format(date), total,idStore, address,0,0,0);
+=======
+>>>>>>> main
          OrderDB odb=new OrderDB();
          CartDB cdb=new CartDB();
          Cart1 cart1=(Cart1) session.getAttribute("cartID");
          CartDetailDB cdtdb=new CartDetailDB();
+<<<<<<< HEAD
+=======
+         Order order=new Order(idOrder,acc.getIdAccount(), formatter.format(date), total,idStore, address,0,0,payment);
+         if(payment==0){
+>>>>>>> main
           if (listCart != null && acc!=null) {
             try {
                 odb.insertOrder(order);
@@ -74,7 +86,11 @@ public class CheckOut extends HttpServlet {
                 response.sendRedirect("Success.jsp");
                 int size = listCart.size();
                 session.setAttribute("size", size);
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> main
                 
             } else {
                 if (acc==null) {
@@ -82,7 +98,14 @@ public class CheckOut extends HttpServlet {
                 } else {
                     response.sendRedirect("Product.jsp");
                 }
+<<<<<<< HEAD
             }       
+=======
+            }   
+         }else{
+               response.sendRedirect("CreditCard.jsp");
+            }
+>>>>>>> main
     }
 
    

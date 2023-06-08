@@ -52,7 +52,11 @@
                                                     <img src="${product.image}" alt="" width="35" class="img-fluid">
                                                 </div>
                                                 <div class="flex-lg-grow-1 ms-3">
+<<<<<<< HEAD
                                                     <h6 class="small mb-0"><a href="#" class="text-reset">${product.name}</a></h6>
+=======
+                                                    <h6 class="small mb-0"><a href="preview?id=${product.idProduct}" class="text-reset">${product.name}</a></h6>
+>>>>>>> main
 
                                                 </div>
                                             </div>
@@ -116,5 +120,8 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
 </div>
+=======
+>>>>>>> main
 <%@include file="/includes/footer.jsp" %>
