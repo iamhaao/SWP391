@@ -136,13 +136,19 @@ public class AccountDB extends DBContext {
                 acc.setIdAccount(rs.getInt(1));
                 acc.setUsername(rs.getString(2));
                 acc.setPassword(rs.getString(3));
-                acc.setName(rs.getString(4));
-                acc.setEmail(rs.getString(5));
-                acc.setAddress(rs.getString(6));
-                acc.setPhone(rs.getString(7));
+                acc.setPhone(rs.getString(4));
+                acc.setName(rs.getString(5));
+                acc.setEmail(rs.getString(6));
+                acc.setAddress(rs.getString(7));
                 acc.setIdRole(rs.getInt(8));
+<<<<<<< main
                 acc.setAvatar(rs.getString(9));
                 acc.setActive(rs.getInt(10));
+=======
+                acc.setAvatar(null);
+                acc.setActive(1);
+                acc.setRoyal(1);
+>>>>>>> local
             }
         } catch (Exception e) {
         }
